@@ -53,7 +53,28 @@ alter table Users
 add constraint foreign key(country)
 references Countries(code);
 
--- Table drop query
--- Not required in the current use case, 
--- adding it for achieving the concept completion
--- drop table Countries;
+-- Drop Countries table
+-- Need to drop the foreign key constraint in Users table 
+-- towards countries table to Drop the countries table
+alter table Users
+drop constraint Users_ibfk_1;
+
+drop table Countries;
+
+-- Create Countries table with new schema
+create table Countries(
+	iso_code varchar(2) primary key,
+    name varchar(255) not null,
+    call_code varchar(10)
+);
+
+-- Change datatype of country in Users table to varchar(2) 
+-- as ISO2 code is used
+alter table Users
+modify column country varchar(2);
+
+-- Add foreign key constraint to country column on Users table
+-- based on new primary key
+alter table Users
+add constraint foreign key(country)
+references Countries(iso_code);
