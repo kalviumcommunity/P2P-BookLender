@@ -78,3 +78,6 @@ modify column country varchar(2);
 alter table Users
 add constraint foreign key(country)
 references Countries(iso_code);
+
+-- -- requests table
+-- create 

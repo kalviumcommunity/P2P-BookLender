@@ -38,3 +38,10 @@ from Inventory i
 inner join Books b on b.id=i.book 
 inner join Users u on u.id=i.owner
 where status='available' and b.id=1;
+
+--view all books with their primary authors
+select b.name as title, a.name as author
+from Books b
+right join TitleAuthors ta on ta.book=b.id
+right join Authors a on ta.author=a.id
+where ta.is_primary=true;

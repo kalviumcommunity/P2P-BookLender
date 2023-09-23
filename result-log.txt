@@ -139,3 +139,19 @@ mysql> select i.id as inv_id, b.name as book, u.name as owner, i.status as statu
 |      8 | The Alchemist                                             | Elon Musk       | available |
 +--------+-----------------------------------------------------------+-----------------+-----------+
 2 rows in set (0.00 sec)
+
+
+mysql> select b.name as title, a.name as author
+    -> from Books b
+    -> right join TitleAuthors ta on ta.book=b.id
+    -> right join Authors a on ta.author=a.id
+    -> where ta.is_primary=true;
++-----------------------------------------------------------+-----------------+
+| title                                                     | author          |
++-----------------------------------------------------------+-----------------+
+| CULTure at Zomato: How to Rewire Your Brain for Greatness | Deepinder Goyal |
+| The Alchemist                                             | Paulo Coelho    |
+| Atomic Habits                                             | James Clear     |
++-----------------------------------------------------------+-----------------+
+3 rows in set (0.01 sec)
+
