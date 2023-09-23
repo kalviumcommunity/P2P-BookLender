@@ -1,7 +1,7 @@
 Table Users{
   id int pk
   name varchar(255) [not null]
-  email varchar(255) [not null]
+  email varchar(255) [not null, unique]
   country varchar(2)
   mobile varchar(15)
 }
@@ -16,13 +16,13 @@ Table Books{
   id int pk 
   title varchar(255) [not null]
   isbn varchar(10)
-  is_primary tinyint [default: 0]
 }
 
 Table TitleAuthors{
   id int pk
   book int
   author int
+  is_primary tinyint [default: 0]
 }
 
 Table Inventory{
@@ -41,6 +41,7 @@ Table Authors{
 Table Requests{
   id int pk
   inventory int [not null]
+  requester int [not null]
   status varchar(10) [default: 'pending']
 }
 
@@ -50,9 +51,9 @@ Ref: "Books"."id" < "TitleAuthors"."book"
 
 Ref: "Authors"."id" < "TitleAuthors"."author"
 
-Ref: "Users"."name" < "Inventory"."owner"
+Ref: "Users"."id" < "Inventory"."owner"
 
-Ref: "Users"."name" < "Inventory"."possessor"
+Ref: "Users"."id" < "Inventory"."possessor"
 
 Ref: "Books"."id" < "Inventory"."book"
 
