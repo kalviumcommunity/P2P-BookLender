@@ -1,0 +1,59 @@
+Table Users{
+  id int pk
+  name varchar(255) [not null]
+  email varchar(255) [not null]
+  country varchar(2)
+  mobile varchar(15)
+}
+
+Table Countries{
+  iso_code varchar(2) pk
+  name varchar(255) [not null]
+  call_code vatchar(10)
+}
+
+Table Books{
+  id int pk 
+  title varchar(255) [not null]
+  isbn varchar(10)
+  is_primary tinyint [default: 0]
+}
+
+Table TitleAuthors{
+  id int pk
+  book int
+  author int
+}
+
+Table Inventory{
+  id int pk
+  book int
+  owner int
+  status varchar(10)
+  possessor int
+}
+
+Table Authors{
+  id int pk
+  name varchar(255)
+}
+
+Table Requests{
+  id int pk
+  inventory int [not null]
+  status varchar(10) [default: 'pending']
+}
+
+Ref: "Users"."country" > "Countries"."iso_code"
+
+Ref: "Books"."id" < "TitleAuthors"."book"
+
+Ref: "Authors"."id" < "TitleAuthors"."author"
+
+Ref: "Users"."name" < "Inventory"."owner"
+
+Ref: "Users"."name" < "Inventory"."possessor"
+
+Ref: "Books"."id" < "Inventory"."book"
+
+Ref: "Inventory"."id" < "Requests"."inventory"
