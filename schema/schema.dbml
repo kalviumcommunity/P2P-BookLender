@@ -58,3 +58,5 @@ Ref: "Users"."id" < "Inventory"."possessor"
 Ref: "Books"."id" < "Inventory"."book"
 
 Ref: "Inventory"."id" < "Requests"."inventory"
+
+Ref: "Users"."id" < "Requests"."requester"
