@@ -1,5 +1,5 @@
 create table Users(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     name varchar(255) not null,
     email varchar(255) not null,
     country varchar(2),
@@ -7,13 +7,13 @@ create table Users(
 );
 
 create table Books(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     name varchar(255) not null,
     isbn varchar(15)
 );
 
 create table Inventory(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     book int not null,
     owner int not null,
     status varchar(10) default 'nolend',
@@ -24,12 +24,12 @@ create table Inventory(
 );
 
 create table Authors(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     name varchar(255) not null
 );
 
 create table TitleAuthors(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     book int not null,
     author int not null,
     is_primary tinyint default 0,
@@ -38,7 +38,7 @@ create table TitleAuthors(
 );
 
 create table Countries(
-	iso_code varchar(2) primary key,
+    iso_code varchar(2) primary key,
     name varchar(255) not null,
     call_code varchar(10)
 );
