@@ -69,7 +69,7 @@ inner join Books b on i.book=b.id
 where i.owner=3 and r.status='pending';
 
 -- approve request id 1
--- this shopuld also change status of inventory to `inuse`
+-- this should also change status of inventory to `inuse`
 update Requests
 set status="approved"
 where id=1;
@@ -78,11 +78,23 @@ update Inventory
 set status="inuse"
 where id in (select inventory from Requests where id=1);
 
+-- reject request id 1 from owner
+update Requests
+set status="rejected"
+where id=1;
+
+-- withdraw non approved requests
+update Requests
+set status="withdrawn"
+where id=1;
+
+
 -- view requests approved to collect (for user 4)
-select r.id as req_id, i.id as inv_id, owner.name as owner, b.name as book  from Requests r 
+select r.id as req_id, i.id as inv_id, owner.name as owner, c.call_code as code, owner.mobile as contact, b.name as book  from Requests r 
 inner join Inventory i on r.inventory=i.id
 inner join Users owner on owner.id=i.owner
 inner join Books b on i.book=b.id
+inner join Countries c on owner.country=c.iso_code
 where r.requester=4 and r.status='approved';
 
 -- mark request 1 as collected
@@ -91,5 +103,13 @@ update Requests
 set status="collected"
 where id=1;
 
--- TODO
--- cancel approved collection request
+
+-- cancel approved collection request for req id 1
+-- this should also change status of inventory to `available`
+update Requests
+set status="cancelled"
+where id=1;
+
+update Inventory
+set status="available"
+where id in (select inventory from Requests where id=1);
