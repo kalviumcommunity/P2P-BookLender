@@ -55,7 +55,7 @@ right join Authors a on ta.author=a.id
 where ta.is_primary=true;
 
 -- delete inventory of book 1 belonging to user 2
-delete from Inventory where book=1 and user = 2
+delete from Inventory where book=1 and owner = 2;
 
 -- raise new lending request towards inventory 8 by user 4
 insert into Requests (inventory,requester)
