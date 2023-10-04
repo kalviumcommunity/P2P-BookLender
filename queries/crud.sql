@@ -113,3 +113,13 @@ where id=1;
 update Inventory
 set status="available"
 where id in (select inventory from Requests where id=1);
+
+-- update status as returned once the possesor returns an inventory to owner
+-- should also update the inventory status as available
+update Requests
+set status="returned"
+where id=1;
+
+update Inventory
+set status="available"
+where id in (select inventory from Requests where id=1);
