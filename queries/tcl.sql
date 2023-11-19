@@ -5,7 +5,7 @@ START TRANSACTION;
 insert into Authors (name)
 values ('Dan Brown');
 
--- create a savepoiutn with current changes
+-- create a savepoint with current changes
 SAVEPOINT sp_ins;
 
 -- sample deletion query for demo
