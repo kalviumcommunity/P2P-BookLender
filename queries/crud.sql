@@ -47,6 +47,14 @@ inner join Books b on b.id=i.book
 inner join Users u on u.id=i.owner
 where status='available' and b.name like '%rewire your brain%';
 
+-- view all copies of book with a given ISBN
+-- use case: search using ISBN
+select i.id as inv_id, b.name as book, u.name as owner, i.status as status
+from Inventory i 
+inner join Books b on b.id=i.book 
+inner join Users u on u.id=i.owner
+where b.isbn='935345171X';
+
 --view all books with their primary authors
 select b.name as title, a.name as author
 from Books b
